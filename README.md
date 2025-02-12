@@ -14,9 +14,18 @@ Note: some visualization code was adapted from https://github.com/utkuozbulak/py
     - `use_existing` [string] You can choose between pre-existing pytorch CNN encoders. If `None` is chosen, then a simple CNN encoder (governed by the `cnn_*` config variables) is built.
     - `output_limit` [integer / float] If `None` is given, the output is unconstrained. If a number is given, the output is passed through a sigmoid and scaled between 0 and `output_limit`.
 3. Choose your augmentations (look at `EXAMPLE_augmentations.json` for possibilities, and point to your new/modified augmentation files in `config.py`
-    - In order to find the mean/std for your dataset to populate the train/test augmentation files, run `python loader.py --image-directory <directory>/train/`
+    - In order to find the mean/std for your dataset to populate the train/test augmentation files, run `python loader.py --image-directory <directory>/train/ --normalize-stats`
 4. Run the training code **[See example code for automation options]**
     - `python main.py <directory>`
+
+####
+A wandb.json file is required with your API key:
+```
+$HOME/wandb.json
+{
+    "key": "XXXXXXX..."
+}
+```
 
 #### Example Code
 **HERE** is example code for taking image paths and `.json` paths, then splitting that up into train/test directories.
@@ -46,7 +55,7 @@ def nn_data(impaths, directory, train_size=0.8, downsample=4):
             if downsample > 1:
                 new_size = (image.size[0] // downsample,
                             image.size[1] // downsample)
-                downsampled = image.resize(new_size, resample=Image.Resampling.LANCZOS)
+                downsampled = image.resize(new_size, resample=Image.LANCZOS)
                 downsampled.save(new_path)
             else:
                 image.save(new_path)

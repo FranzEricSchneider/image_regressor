@@ -4,7 +4,7 @@ CONFIG = {
     "data_dir": None,
     "extension": "jpg",
     "starting_channels": 3,
-    "regression_key": "harvestability_label",
+    "regression_key": "density",
     "is_autoencoder": False,
     "wandb": True,
     "wandb_print":
@@ -49,7 +49,7 @@ CONFIG = {
     "frozen_embedding": False,
 
     "lr": 1e-3,  # 1e-2
-    "scheduler": "OneCycleLR",
+    "scheduler": "constant",
     "StepLR_kwargs": {"step_size": 5, "gamma": 0.2},
     "LRTest_kwargs": {"min_per_epoch": 0.05, "runtime_min": 6, "start": 1e-6, "end": 1.0},
     "OneCycleLR_kwargs": {"max_lr": 5e-3, "min_lr": 5e-5},
@@ -63,18 +63,18 @@ CONFIG = {
     # applied in the loader phase. The way to experiment with augmentations is
     # to make a copy of the file, set those that you want, and then select the
     # files one-by-one as a command-line argument.
-    "train_augmentation_path": "./train_augmentations.json",
-    "test_augmentation_path": "./test_augmentations.json",
+    "train_augmentation_path": "./image_regressor/train_augmentations.json",
+    "test_augmentation_path": "./image_regressor/test_augmentations.json",
 
     # Increase if you can handle it, generally
     # "batch_size": 500,  # MNIST original size, regressor
     # "batch_size": 32,  # MNIST scaled up
     # "batch_size": 24,  # Beets
-    "batch_size": 256,  # Matrix @ //32,//32
+    # "batch_size": 256,  # Matrix @ //32,//32
     # "batch_size": 100,  # Outdoors @ //4,//4
     # "batch_size": 52,  # Vines @ //4,//4  (Hand-made model)
     # "batch_size": 10,  # Vines @ //4,//4  (Large model safety)
-    # "batch_size": 6,  # Backyard @ //4,//4  (Large model safety)
+    "batch_size": 6,  # Backyard @ //4,//4  (Large model safety)
     # "epochs": 8,  # Beets
     # "epochs": 40,  # Outdoors
     "epochs": 50,  # Vines

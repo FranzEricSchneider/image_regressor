@@ -447,7 +447,8 @@ def get_normalization_stats(files, number):
     imgs = numpy.concatenate(imgs, axis=0) / 255
     mean = numpy.mean(imgs, axis=(0, 1))
     std = numpy.std(imgs, axis=(0, 1))
-    print(f"mean: {mean}, stdev: {std}")
+    print(f'"mean": [{mean[0]}, {mean[1]}, {mean[2]}],')
+    print(f'"std": [{std[0]}, {std[1]}, {std[2]}]')
 
 
 def augment_images(data_path, extension, savedir, augpath, key):

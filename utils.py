@@ -60,7 +60,9 @@ def load_config():
 
     parser = argparse.ArgumentParser(description="Set config via command line")
     parser.add_argument(
-        "data_dir", type=Path, help="Path to dir with all images and labels"
+        "data_dir",
+        type=Path,
+        help="Path to dir with train/ and test/, both containing images/labels",
     )
     parser.add_argument("--wandb-print", nargs="+", default=None)
     parser.add_argument("-b", "--batch-size", type=int, default=None)
